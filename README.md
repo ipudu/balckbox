@@ -1,2 +1,2 @@
-# balckbox
+# blackbox
 Artificial Neural network potentials

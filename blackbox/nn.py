@@ -6,6 +6,10 @@
 from __future__ import print_function, division
 import numpy as np
 from numpy.linalg import norm
+import torch
+import torch.nn as nn
+from torch.autograd import Variable
+
 
 def angle(A, B, C):
     """calculate the angle"""
@@ -58,3 +62,41 @@ def G5(Rij, Rik, Rjk, Rc, Rs, zeta, lmb, theta, etha):
     """type 4 of fingerprint"""
     return (1 + lmb * theta) * np.exp(-etha * (Rij ** 2 + Rik ** 2)) * \
             fc(Rij, Rc) * fc(Rik, Rc)
+
+
+###############################################################################
+#data prep
+###############################################################################
+
+
+
+
+
+
+
+
+
+###############################################################################
+#feed forward neural network
+###############################################################################
+
+class Net(nn.Module):
+    def __init__(self, input_size, hidden_size, num_classes):
+        super(Net, self).__init__()
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size, num_classes)
+
+    def forward(self, x):
+        out = self.fc1(x)
+        out = self.relu(out)
+        out = self.fc2(out)
+        return out
+
+net = Net(input_size, hidden_size, num_classes)
+
+#Loss and Optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
+
+#Train the Model

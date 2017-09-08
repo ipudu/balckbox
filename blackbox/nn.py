@@ -43,7 +43,7 @@ def G1(Rij, Rc):
 
 def G2(Rij, Rc, Rs, etha):
     """type 1 of fingerprint"""
-    return np.exp(-eta * (Rij - Rs) ** 2. / (Rc ** 2)) * fc(Rij, Rc)
+    return np.exp(-eta * (Rij - Rs) ** 2 / (Rc ** 2)) * fc(Rij, Rc)
 
 def G3(Rij, Rc, kappa):
     """type 3 of fingerprint"""
@@ -51,8 +51,10 @@ def G3(Rij, Rc, kappa):
 
 def G4(Rij, Rik, Rjk, Rc, Rs, zeta, lmb, theta, etha):
     """type 4 of fingerprint"""
-    return (1 + lmb * theta) * np.exp(-etha * (Rij ** 2. + Rik ** 2. + Rjk ** 2.) * \
+    return (1 + lmb * theta) * np.exp(-etha * (Rij ** 2 + Rik ** 2 + Rjk ** 2)) * \
             fc(Rij, Rc) * fc(Rik, Rc) * fc(Rjk, Rc)
 
-def G5():
-    pass
+def G5(Rij, Rik, Rjk, Rc, Rs, zeta, lmb, theta, etha):
+    """type 4 of fingerprint"""
+    return (1 + lmb * theta) * np.exp(-etha * (Rij ** 2 + Rik ** 2)) * \
+            fc(Rij, Rc) * fc(Rik, Rc)

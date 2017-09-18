@@ -29,6 +29,13 @@ def fc(Rij, Rc):
     else:
         return 0.5 * (np.cos(np.pi * Rij / Rc) + 1.)
 
+def fc_prime(Rij, Rc):
+    """derivative of cutoff function"""
+    if Rij > Rc:
+        return 0.
+    else:
+        return -0.5 * np.pi / Rc * np.sin(np.pi * Rij / Rc)
+
 def fc_tanh(Rij, Rc):
     """ tanh cutoff function"""
     if Rij > Rc:

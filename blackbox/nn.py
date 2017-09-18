@@ -10,6 +10,12 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
+from MDAnalysis import Universe
+from MDAnalysis.analysis.distances import distance_array
+
+###############################################################################
+#utilities
+###############################################################################
 
 def angle(A, B, C):
     """calculate the angle"""
@@ -70,6 +76,14 @@ def G5(Rij, Rik, Rjk, Rc, Rs, zeta, lmb, theta, etha):
     return (1 + lmb * theta) * np.exp(-etha * (Rij ** 2 + Rik ** 2)) * \
             fc(Rij, Rc) * fc(Rik, Rc)
 
+class Neighborlist(object):
+    """class of calculating neighbor list"""
+    def __init__(self, coords):
+        self.distance_array =  distance_array(coords, coords)
+
+class FingerPrint(object):
+    """class of calculating fingerprints"""
+    pass
 
 ###############################################################################
 #feed forward neural network
@@ -95,3 +109,11 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
 #Train the Model
+
+
+###############################################################################
+#main
+###############################################################################
+
+if __name__ == '__main__':
+    print('Hello World!')
